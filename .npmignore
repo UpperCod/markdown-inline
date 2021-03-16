@@ -1,0 +1,4 @@
+/node_modules
+/tests
+/jsconfig.json
+/rollup.config.js

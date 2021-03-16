@@ -1,0 +1,49 @@
+{
+    "name": "pkg_name",
+    "type": "module",
+    "version": "0.0.0",
+    "description": "Capture text fragments based on regular expressions that are executed for each line of the text",
+    "main": "./module.cjs",
+    "module": "./src/module.js",
+    "typings": "./types.d.ts",
+    "exports": {
+        ".": {
+            "import": "./src/module.js",
+            "require": "./module.cjs"
+        }
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "scripts": {
+        "build": "rollup -c",
+        "dev": "rollup -c -w",
+        "test": "ava",
+        "prepare": "npm run build && npm test"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/UpperCod/pkg_name.git"
+    },
+    "author": "UpperCod",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/UpperCod/pkg_name/issues"
+    },
+    "homepage": "https://github.com/UpperCod/pkg_name#readme",
+    "devDependencies": {
+        "@betit/rollup-plugin-rename-extensions": "^0.1.0",
+        "ava": "^3.10.1",
+        "builtin-modules": "^3.1.0",
+        "rollup": "^2.21.0"
+    },
+    "ava": {
+        "files": [
+            "tests/**/*.test.js"
+        ]
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "singleQuote": false
+    }
+}
