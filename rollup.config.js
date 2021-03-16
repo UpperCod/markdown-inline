@@ -1,21 +1,8 @@
-import builtins from "builtin-modules";
-import renameExtensions from "@betit/rollup-plugin-rename-extensions";
-import pkg from "./package.json";
-
 export default {
-    input: ["./src/module.js"],
-    external: Object.keys(pkg.dependencies || {}).concat(builtins),
+    input: ["./src/markdown.js"],
     output: {
-        dir: "./",
+        file: "markdown.cjs",
         format: "cjs",
-        sourcemap: true,
+        sourcemap: false,
     },
-    plugins: [
-        renameExtensions({
-            include: ["**/*.js"],
-            mappings: {
-                ".js": ".cjs",
-            },
-        }),
-    ],
 };
