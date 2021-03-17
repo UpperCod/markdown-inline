@@ -168,12 +168,16 @@ export function parse(content, tag, args, elements) {
             while (i++) {
                 if (lines[i] && lines[i][1] !== "~~~") {
                     content.push(lines[i][1]);
-                } else {
-                    break;
-                }
+                } else break;
             }
 
-            children.push(TAG(ELEMENTS.code, { type }, content.join("\n")));
+            children.push(
+                TAG(
+                    ELEMENTS.code,
+                    { type, "data-type": type },
+                    TAG(ELEMENTS.nestedCode, null, content.join("\n"))
+                )
+            );
             continue;
         }
         if (!line) continue;
@@ -200,6 +204,7 @@ export function parse(content, tag, args, elements) {
  * @property {string} link
  * @property {string} inlineCode
  * @property {string} code
+ * @property {string} nestedCode
  * @property {string} quote
  * @property {string} table
  * @property {string} tableRow
