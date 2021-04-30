@@ -58,7 +58,6 @@ Link : [link](#link)
                 tag("img", { src: "./demo.jpg", title: "image" })
             ),
             tag("p", null, "Link : ", tag("a", { href: "#link" }, "link")),
-            tag("p", null, " "),
         ]
     );
 });

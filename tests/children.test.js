@@ -10,20 +10,17 @@ test("simple replace", async (t) => {
 
     const md = setup(tag);
 
-    t.deepEqual(
-        md`
-            ~~~jsx
-            const tag = <host />;
-            ~~~
-        `,
+    const data = md`
+~~~jsx
+const tag = <host />;
+~~~
+    `;
 
-        [
-            tag(
-                "pre",
-                { type: "jsx", "data-type": "jsx" },
-                tag("code", null, "const tag = <host />;")
-            ),
-            tag("p", null, " "),
-        ]
-    );
+    t.deepEqual(data, [
+        tag(
+            "pre",
+            { type: "jsx", "data-type": "jsx" },
+            tag("code", null, "const tag = <host />;")
+        ),
+    ]);
 });

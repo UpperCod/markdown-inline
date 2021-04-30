@@ -94,8 +94,10 @@ export function parse(content, tag, args, elements) {
     /**@type {any[]} */
     let currentTable;
     for (let i = 0; i < length; i++) {
+        /**
+         * @todo the deep variable already captures the indentation, use to generate deep lists.
+         */
         const [deep, line] = lines[i];
-
         const testList = line.match(/^(\d+\.|-|\+)\s*(.+)/);
         if (testList) {
             const [, type, content] = testList;
@@ -167,10 +169,12 @@ export function parse(content, tag, args, elements) {
             let content = [];
             while (i++) {
                 if (lines[i] && lines[i][1] !== "~~~") {
-                    content.push(lines[i][1]);
+                    content.push(
+                        " ".repeat(lines[i][0] > -1 ? lines[i][0] : 0) +
+                            lines[i][1]
+                    );
                 } else break;
             }
-
             children.push(
                 TAG(
                     ELEMENTS.code,
