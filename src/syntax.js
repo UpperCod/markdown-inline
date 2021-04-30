@@ -170,8 +170,9 @@ export function parse(content, tag, args, elements) {
             while (i++) {
                 if (lines[i] && lines[i][1] !== "~~~") {
                     content.push(
-                        " ".repeat(lines[i][0] > -1 ? lines[i][0] : 0) +
-                            lines[i][1]
+                        ELEMENTS.tab.repeat(
+                            lines[i][0] > -1 ? lines[i][0] : 0
+                        ) + lines[i][1]
                     );
                 } else break;
             }
@@ -218,4 +219,5 @@ export function parse(content, tag, args, elements) {
  * @property {string} image
  * @property {[string,string]} list
  * @property {string} listItem
+ * @property {string} tab
  */
