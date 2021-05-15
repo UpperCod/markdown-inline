@@ -1,6 +1,23 @@
 import test from "ava";
-import { readFile } from "fs/promises";
+
 import { setup } from "../src/markdown.js";
+
+const content = `
+# every
+
+my \`code\`
+
+\`\`\`jsx
+import { c } from "atomico";
+
+function component() {
+    return <host></host>;
+}
+
+export const Component = c(component);
+\`\`\`
+
+`;
 
 test("parseFile", async (t) => {
     const tag = (type, props, ...children) => ({
@@ -11,13 +28,16 @@ test("parseFile", async (t) => {
 
     const md = setup(tag);
 
-    const content = await readFile(
-        new URL("./example.md", import.meta.url),
-        "utf-8"
-    );
-
     t.deepEqual(md.call(null, [content]), [
         { type: "h1", props: null, children: ["every"] },
+        {
+            type: "p",
+            props: null,
+            children: [
+                "my ",
+                { type: "code", props: null, children: ["code"] },
+            ],
+        },
         {
             type: "pre",
             props: { type: "jsx", "data-type": "jsx" },
