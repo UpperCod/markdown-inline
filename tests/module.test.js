@@ -19,6 +19,10 @@ test("simple replace", async (t) => {
 
 **Bold**
 
+~code~
+
+\`code\`
+
 | Col 1 | Col 2 |
 | ----- | ----- |
 | c-1-1 | c-1-2 |
@@ -27,37 +31,72 @@ Image : ![image](./demo.jpg)
 Link : [link](#link)
         `,
         [
-            tag("h1", null, ["title"]),
-            tag(
-                "ol",
-                null,
-                tag("li", null, "Item 1"),
-                tag("li", null, "Item 2")
-            ),
-            tag("p", null, tag("strong", null, "Bold")),
-            tag(
-                "table",
-                null,
-                tag(
-                    "tr",
-                    null,
-                    tag("td", null, "Col 1"),
-                    tag("td", null, "Col 2")
-                ),
-                tag(
-                    "tr",
-                    null,
-                    tag("td", null, "c-1-1"),
-                    tag("td", null, "c-1-2")
-                )
-            ),
-            tag(
-                "p",
-                null,
-                "Image : ",
-                tag("img", { src: "./demo.jpg", title: "image" })
-            ),
-            tag("p", null, "Link : ", tag("a", { href: "#link" }, "link")),
+            { type: "h1", props: null, children: ["title"] },
+            {
+                type: "ol",
+                props: null,
+                children: [
+                    { type: "li", props: null, children: ["Item 1"] },
+                    { type: "li", props: null, children: ["Item 2"] },
+                ],
+            },
+            {
+                type: "p",
+                props: null,
+                children: [{ type: "strong", props: null, children: ["Bold"] }],
+            },
+            {
+                type: "p",
+                props: null,
+                children: [{ type: "code", props: null, children: ["code"] }],
+            },
+            {
+                type: "p",
+                props: null,
+                children: [{ type: "code", props: null, children: ["code"] }],
+            },
+            {
+                type: "table",
+                props: null,
+                children: [
+                    {
+                        type: "tr",
+                        props: null,
+                        children: [
+                            { type: "td", props: null, children: ["Col 1"] },
+                            { type: "td", props: null, children: ["Col 2"] },
+                        ],
+                    },
+                    {
+                        type: "tr",
+                        props: null,
+                        children: [
+                            { type: "td", props: null, children: ["c-1-1"] },
+                            { type: "td", props: null, children: ["c-1-2"] },
+                        ],
+                    },
+                ],
+            },
+            {
+                type: "p",
+                props: null,
+                children: [
+                    "Image : ",
+                    {
+                        type: "img",
+                        props: { src: "./demo.jpg", title: "image" },
+                        children: [],
+                    },
+                ],
+            },
+            {
+                type: "p",
+                props: null,
+                children: [
+                    "Link : ",
+                    { type: "a", props: { href: "#link" }, children: ["link"] },
+                ],
+            },
         ]
     );
 });

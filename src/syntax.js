@@ -31,8 +31,9 @@ const generic = [
     ],
     [/_([^_]+)_/g, (content) => TAG(ELEMENTS.italic, null, syntax(content))],
     [
-        /~([^~]+)~/g,
-        (content) => TAG(ELEMENTS.inlineCode, null, syntax(content)),
+        ///~([^~]+)~/g,
+        /(?:~([^~]+)~|`([^`]+)`)/g,
+        (opt1, opt2) => TAG(ELEMENTS.inlineCode, null, syntax(opt1 || opt2)),
     ],
 ];
 /**
@@ -163,12 +164,12 @@ export function parse(content, tag, args, elements) {
             children.push(TAG(ELEMENTS.quote, null, syntax(content)));
             continue;
         }
-        const testCode = line.match(/^~~~(.*)/);
+        const testCode = line.match(/^(~~~|```)(.*)/);
         if (testCode) {
-            const [, type] = testCode;
+            const [, quote, type] = testCode;
             let content = [];
             while (i++) {
-                if (lines[i] && lines[i][1] !== "~~~") {
+                if (lines[i] && lines[i][1] !== quote) {
                     content.push(
                         ELEMENTS.tab.repeat(
                             lines[i][0] > -1 ? lines[i][0] : 0

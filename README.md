@@ -39,3 +39,49 @@ Custom ${(<MyComponent />)}
 -   [ ] **Nested lists**: The parser generates a tag index that defines the depth of the tag. I have not applied that argument to create nested lists.
 -   [ ] **Line division**.
 -   [ ] **Task lists**.
+
+```jsx
+import { c, useHost } from "atomico";
+
+const counter = () => {
+    const { current } = useHost();
+    return (
+        <host>
+            <button onclick={() => current.count--}>decrement</button>
+            <strong>{current.count}</strong>
+            <button onclick={() => current.count++}>increment</button>
+        </host>
+    );
+};
+
+counter.props = {
+    count: { type: Number, value: 0 },
+};
+```
+
+```jsx
+import { c } from "atomico";
+
+const decrement = (state) => state - 1;
+const increment = (state) => state + 1;
+
+function useCounter(prop) {
+    const [count, setCount] = useProp(prop);
+    return [count, () => setCount(increment), () => setCount(decrement)];
+}
+
+function counter() {
+    const [count, increment, decrement] = useCounter("count");
+    return (
+        <host>
+            <button onclick={increment}>decrement</button>
+            <strong>{count}</strong>
+            <button onclick={decrement}>increment</button>
+        </host>
+    );
+}
+
+counter.props = {
+    count: { type: Number, value: 0 },
+};
+```
