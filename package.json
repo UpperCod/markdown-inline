@@ -1,7 +1,7 @@
 {
     "name": "@uppercod/markdown-inline",
     "type": "module",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "Capture text fragments based on regular expressions that are executed for each line of the text",
     "main": "./markdown.cjs",
     "module": "./src/markdown.js",
@@ -43,5 +43,8 @@
     "prettier": {
         "tabWidth": 4,
         "singleQuote": false
+    },
+    "dependencies": {
+        "@uppercod/indentation": "latest"
     }
 }

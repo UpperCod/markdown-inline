@@ -1,4 +1,4 @@
-import { indentation } from "./indentation.js";
+import { getIndentation } from "@uppercod/indentation";
 
 /**
  * @type {Tag}
@@ -87,7 +87,7 @@ export function parse(content, tag, args, elements) {
     TAG = tag;
     ARGS = args;
     ELEMENTS = elements;
-    const lines = indentation(content);
+    const lines = getIndentation(content);
     const { length } = lines;
     const children = [];
     /**@type {[string,any[]]} */
