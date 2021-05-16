@@ -5,7 +5,6 @@ import { parse, createArg } from "./syntax.js";
  */
 const DEFAULT_ELEMENTS = {
     link: "a",
-    meta: "meta",
     title: "h*",
     text: "p",
     inlineCode: "code",

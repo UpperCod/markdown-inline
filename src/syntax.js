@@ -103,7 +103,7 @@ export function parse(content, tag, args, elements) {
         if (testCode) {
             const [, block, type] = testCode;
             let content = [];
-            while (i++) {
+            while (++i) {
                 if (lines[i] && lines[i][1] !== block) {
                     content.push(
                         ELEMENTS.tab.repeat(
@@ -114,8 +114,8 @@ export function parse(content, tag, args, elements) {
             }
             children.push(
                 TAG(
-                    ELEMENTS[block === "---" ? "meta" : "code"],
-                    { type, "data-type": type },
+                    ELEMENTS.code,
+                    { type, "data-type": type, meta: block === "---" },
                     TAG(ELEMENTS.nestedCode, null, content.join("\n"))
                 )
             );
@@ -208,7 +208,6 @@ export function parse(content, tag, args, elements) {
  * @typedef {Object}  Elements
  * @property {string} title
  * @property {string} text
- * @property {string} meta
  * @property {string} link
  * @property {string} inlineCode
  * @property {string} code
