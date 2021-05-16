@@ -99,6 +99,28 @@ export function parse(content, tag, args, elements) {
          * @todo the deep variable already captures the indentation, use to generate deep lists.
          */
         const [deep, line] = lines[i];
+        const testCode = line.match(/^(~~~|```|---)(.*)/);
+        if (testCode) {
+            const [, block, type] = testCode;
+            let content = [];
+            while (i++) {
+                if (lines[i] && lines[i][1] !== block) {
+                    content.push(
+                        ELEMENTS.tab.repeat(
+                            lines[i][0] > -1 ? lines[i][0] : 0
+                        ) + lines[i][1]
+                    );
+                } else break;
+            }
+            children.push(
+                TAG(
+                    ELEMENTS[block === "---" ? "meta" : "code"],
+                    { type, "data-type": type },
+                    TAG(ELEMENTS.nestedCode, null, content.join("\n"))
+                )
+            );
+            continue;
+        }
         const testList = line.match(/^(\d+\.|-|\+)\s*(.+)/);
         if (testList) {
             const [, type, content] = testList;
@@ -164,28 +186,7 @@ export function parse(content, tag, args, elements) {
             children.push(TAG(ELEMENTS.quote, null, syntax(content)));
             continue;
         }
-        const testCode = line.match(/^(~~~|```)(.*)/);
-        if (testCode) {
-            const [, quote, type] = testCode;
-            let content = [];
-            while (i++) {
-                if (lines[i] && lines[i][1] !== quote) {
-                    content.push(
-                        ELEMENTS.tab.repeat(
-                            lines[i][0] > -1 ? lines[i][0] : 0
-                        ) + lines[i][1]
-                    );
-                } else break;
-            }
-            children.push(
-                TAG(
-                    ELEMENTS.code,
-                    { type, "data-type": type },
-                    TAG(ELEMENTS.nestedCode, null, content.join("\n"))
-                )
-            );
-            continue;
-        }
+
         if (!line) continue;
         children.push(TAG(ELEMENTS.text, null, syntax(line)));
     }
@@ -207,6 +208,7 @@ export function parse(content, tag, args, elements) {
  * @typedef {Object}  Elements
  * @property {string} title
  * @property {string} text
+ * @property {string} meta
  * @property {string} link
  * @property {string} inlineCode
  * @property {string} code

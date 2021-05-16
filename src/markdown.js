@@ -5,6 +5,7 @@ import { parse, createArg } from "./syntax.js";
  */
 const DEFAULT_ELEMENTS = {
     link: "a",
+    meta: "meta",
     title: "h*",
     text: "p",
     inlineCode: "code",
@@ -26,14 +27,16 @@ const DEFAULT_ELEMENTS = {
  * @param { Partial<import("./syntax").Elements>} [elements]
  * @returns {(part:TemplateStringsArray,...args:any[])=>any}
  */
-export const setup = (tag, elements) => (parts, ...args) =>
-    parse(
-        parts.reduce(
-            (value, part, index) =>
-                value + (part + (args[index] ? createArg(index) : "")),
-            ""
-        ),
-        tag,
-        args,
-        { ...DEFAULT_ELEMENTS, ...elements }
-    );
+export const setup =
+    (tag, elements) =>
+    (parts, ...args) =>
+        parse(
+            parts.reduce(
+                (value, part, index) =>
+                    value + (part + (args[index] ? createArg(index) : "")),
+                ""
+            ),
+            tag,
+            args,
+            { ...DEFAULT_ELEMENTS, ...elements }
+        );

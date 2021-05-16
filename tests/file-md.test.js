@@ -3,6 +3,9 @@ import test from "ava";
 import { setup } from "../src/markdown.js";
 
 const content = `
+---
+name: age
+---
 # every
 
 my \`code\`
@@ -29,6 +32,11 @@ test("parseFile", async (t) => {
     const md = setup(tag);
 
     t.deepEqual(md.call(null, [content]), [
+        {
+            type: "meta",
+            props: { type: "", "data-type": "" },
+            children: [{ type: "code", props: null, children: ["name: age"] }],
+        },
         { type: "h1", props: null, children: ["every"] },
         {
             type: "p",
