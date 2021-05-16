@@ -3,23 +3,18 @@
     "type": "module",
     "version": "0.6.0",
     "description": "Capture text fragments based on regular expressions that are executed for each line of the text",
-    "main": "./markdown.cjs",
     "module": "./src/markdown.js",
-    "typings": "./types.d.ts",
+    "types": "./markdown.d.ts",
     "exports": {
-        ".": {
-            "import": "./src/markdown.js",
-            "require": "./markdown.cjs"
-        }
+        "./": "./src/markdown.js"
     },
     "publishConfig": {
         "access": "public"
     },
     "scripts": {
-        "build": "rollup -c",
-        "dev": "rollup -c -w",
+        "types": "tsc",
         "test": "ava",
-        "prepare": "npm run build && npm test"
+        "prepare": "npm test && npm run types"
     },
     "repository": {
         "type": "git",
@@ -33,7 +28,7 @@
     "homepage": "https://github.com/UpperCod/markdown-inline#readme",
     "devDependencies": {
         "ava": "^3.10.1",
-        "rollup": "^2.21.0"
+        "typescript": "^4.2.4"
     },
     "ava": {
         "files": [
