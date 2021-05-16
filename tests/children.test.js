@@ -19,7 +19,7 @@ const tag = <host />;
     t.deepEqual(data, [
         tag(
             "pre",
-            { type: "jsx", "data-type": "jsx" },
+            { type: "jsx", "data-type": "jsx", meta: false },
             tag("code", null, "const tag = <host />;")
         ),
     ]);

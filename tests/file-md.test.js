@@ -34,8 +34,8 @@ test("parseFile", async (t) => {
 
     t.deepEqual(md.call(null, [content]), [
         {
-            type: "meta",
-            props: { type: "", "data-type": "" },
+            type: "pre",
+            props: { type: "", "data-type": "", meta: true },
             children: [{ type: "code", props: null, children: ["name: age"] }],
         },
         { type: "h1", props: null, children: ["every"] },
@@ -49,7 +49,7 @@ test("parseFile", async (t) => {
         },
         {
             type: "pre",
-            props: { type: "jsx", "data-type": "jsx" },
+            props: { type: "jsx", "data-type": "jsx", meta: false },
             children: [
                 {
                     type: "code",
