@@ -1,7 +1,7 @@
 {
     "name": "@uppercod/markdown-inline",
     "type": "module",
-    "version": "0.7.1",
+    "version": "0.8.0",
     "description": "Capture text fragments based on regular expressions that are executed for each line of the text",
     "module": "./src/markdown.js",
     "types": "./markdown.d.ts",

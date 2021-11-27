@@ -11,7 +11,7 @@ name: age
 
 my \`code\`
 
-\`\`\`jsx
+\`\`\`\`jsx
 import { c } from "atomico";
 
 function component() {
@@ -19,7 +19,7 @@ function component() {
 }
 
 export const Component = c(component);
-\`\`\`
+\`\`\`\`
 
 `;
 

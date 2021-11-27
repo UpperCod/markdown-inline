@@ -99,7 +99,8 @@ export function parse(content, tag, args, elements) {
          * @todo the deep variable already captures the indentation, use to generate deep lists.
          */
         const [deep, line] = lines[i];
-        const testCode = line.match(/^(~~~|```|---)(.*)/);
+        const testCode = line.match(/^(~~~(?:~){0,1}|```(?:`){0,1}|---)(.*)/);
+
         if (testCode) {
             const [, block, type] = testCode;
             let content = [];
