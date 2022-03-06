@@ -22,9 +22,10 @@ const DEFAULT_ELEMENTS = {
     tab: "    ",
 };
 /**
+ * @template T
  * @param {(type:string,props:any,...children:any)=>any} tag
  * @param { Partial<import("./syntax").Elements>} [elements]
- * @returns {(part:TemplateStringsArray,...args:any[])=>any}
+ * @returns {(part:TemplateStringsArray,...args:any[])=>T}
  */
 export const setup =
     (tag, elements) =>
